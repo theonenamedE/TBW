@@ -56,7 +56,7 @@ async function loadMore() {
     searchPage.value++
     const result = await loadMoreMovies(searchQuery.value, searchPage.value)
     movies.value?.push(...result.Search)
-    state.setState(searchPage.value, searchQuery.value, movies.value)
+    state.setState(searchPage.value, searchQuery.value, movies.value ? movies.value : [])
     for (const m of result.Search) {
       loadingImages.value[m.imdbID] = true
     }
@@ -73,7 +73,7 @@ function handleLoaded(id: string) {
 }
 
 onMounted(() => {
-  if (state.searchQuery !== '' && state.searchPage !== 0 && state.movieList.length > 0) {
+  if (state.searchQuery !== '' && state.searchPage !== 0 && state.movieList !== undefined && state.movieList.length > 0) {
     searchQuery.value = state.searchQuery
     searchPage.value = state.searchPage
     movies.value = state.movieList
