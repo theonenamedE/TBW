@@ -93,7 +93,7 @@ watch(searchQuery, () => {
   }
 
   timeoutId = window.setTimeout(() => {
-    if (searchQuery.value.length > 2) {
+    if (searchQuery.value.length > 2 && state.searchQuery !== searchQuery.value) {
       searchMovie()
     }
     timeoutId = null

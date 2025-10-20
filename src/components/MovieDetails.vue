@@ -18,14 +18,14 @@ const alreadyAdded = computed(() =>
 <template>
   <ErrorAlert class="" v-if="props.movie?.Error" :message="props.movie.ErrorMessage" />
 
-  <div v-else class="hero bg-base-200 min-h-screen">
+  <div v-else class="hero bg-base-200 min-h-screen rounded-md">
     <!-- Loading state for hero content -->
     <div v-if="props.movie === undefined" class="hero-content">
       <span class="loading loading-ring loading-lg text-primary"></span>
     </div>
 
     <!-- Actual hero content -->
-    <div v-else class="hero bg-base-200 min-h-screen">
+    <div v-else class="hero bg-base-200 min-h-screen rounded-md">
       <div class="hero-content flex-col lg:flex-row gap-12">
         <!-- Poster -->
         <figure class="flex-shrink-0">
