@@ -32,6 +32,9 @@ jobs:
       - name: Build project
         run: DEPLOY_ENV=GH_PAGES pnpm build
 
+      - name: Copy index.html to 404.html
+        run: cp dist/index.html dist/404.html
+
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: peaceiris/actions-gh-pages@v4
