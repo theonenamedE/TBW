@@ -48,8 +48,6 @@ async function searchMovie() {
   }
 }
 
-
-
 async function loadMore() {
   try {
     isLoadingMore.value = true
@@ -73,7 +71,12 @@ function handleLoaded(id: string) {
 }
 
 onMounted(() => {
-  if (state.searchQuery !== '' && state.searchPage !== 0 && state.movieList !== undefined && state.movieList.length > 0) {
+  if (
+    state.searchQuery !== '' &&
+    state.searchPage !== 0 &&
+    state.movieList !== undefined &&
+    state.movieList.length > 0
+  ) {
     searchQuery.value = state.searchQuery
     searchPage.value = state.searchPage
     movies.value = state.movieList

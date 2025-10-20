@@ -29,7 +29,11 @@ const emit = defineEmits<{ (e: 'loaded', id: string): void; (e: 'loadMore'): voi
       </li>
     </ul>
     <div v-if="props.isSearch && props.movies.length > 0" class="flex justify-center mt-8">
-      <button class="btn btn-outline btn-secondary" @click="emit('loadMore')" :disabled="props.loadingMore">
+      <button
+        class="btn btn-outline btn-secondary"
+        @click="emit('loadMore')"
+        :disabled="props.loadingMore"
+      >
         <span v-if="props.loadingMore" class="loading loading-spinner loading-xs mr-2"></span>
         Load more
       </button>
