@@ -30,7 +30,7 @@ jobs:
         run: pnpm install
 
       - name: Build project
-        run: pnpm build
+        run: DEPLOY_ENV=GH_PAGES pnpm build
 
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
