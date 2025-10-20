@@ -55,7 +55,7 @@ async function loadMore() {
     isLoadingMore.value = true
     searchPage.value++
     const result = await loadMoreMovies(searchQuery.value, searchPage.value)
-    movies.value.push(...result.Search)
+    movies.value?.push(...result.Search)
     state.setState(searchPage.value, searchQuery.value, movies.value)
     for (const m of result.Search) {
       loadingImages.value[m.imdbID] = true

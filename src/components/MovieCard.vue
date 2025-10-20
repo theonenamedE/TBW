@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMoviesStore } from '@/stores/movies'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import type { MovieType } from '@/types/Movie'
 
 const props = defineProps<{
@@ -11,6 +11,8 @@ const props = defineProps<{
 const emit = defineEmits<{ (e: 'loaded', id: string): void }>()
 
 const store = useMoviesStore()
+
+const imageLoadFailed = ref(false)
 
 const alreadyAdded = computed(() =>
   store.movieList.some((movie) => movie.imdbID === props.movie.imdbID),
@@ -25,12 +27,35 @@ const alreadyAdded = computed(() =>
       >
         <span v-if="props.loading" class="loading loading-ring loading-xl text-primary"></span>
 
+        <div v-else-if="imageLoadFailed" class="flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-12 h-12 text-gray-400"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
+            />
+          </svg>
+        </div>
+
         <img
-          v-show="!props.loading"
+          v-show="!props.loading && !imageLoadFailed"
           :src="props.movie.Poster"
           :alt="props.movie.Title"
           class="object-cover w-full h-full"
           @load="emit('loaded', props.movie.imdbID)"
+          @error="
+            () => {
+              imageLoadFailed = true
+              emit('loaded', props.movie.imdbID)
+            }
+          "
         />
       </figure>
     </router-link>
