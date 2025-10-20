@@ -36,7 +36,7 @@ function onSubmit() {
           @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
         />
       </label>
-      <button class="btn btn-neutral join-item">Search</button>
+      <!-- <button class="btn btn-neutral join-item">Search</button> -->
     </div>
   </form>
 </template>

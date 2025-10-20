@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { loadMoreMovies, searchMovies } from '@/lib/api'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import SearchBar from '@/components/SearchBar.vue'
 import MovieList from '@/components/MovieList.vue'
 import type { MovieType } from '@/types/Movie'
@@ -23,6 +23,7 @@ async function searchMovie() {
     searchPage.value = 1
     const result = await searchMovies(searchQuery.value)
     if (!result.Response) {
+      movies.value = []
       seachError.value = result.ErrorMessage
       return
     }
@@ -41,6 +42,7 @@ async function searchMovie() {
       loadingImages.value[m.imdbID] = true
     }
   } catch (error) {
+    movies.value = []
     console.error(error)
     seachError.value = (error as Error).message
   } finally {
@@ -81,6 +83,21 @@ onMounted(() => {
     searchPage.value = state.searchPage
     movies.value = state.movieList
   }
+})
+
+let timeoutId: number | null = null
+
+watch(searchQuery, () => {
+  if (timeoutId) {
+    clearTimeout(timeoutId)
+  }
+
+  timeoutId = window.setTimeout(() => {
+    if (searchQuery.value.length > 2) {
+      searchMovie()
+    }
+    timeoutId = null
+  }, 500)
 })
 </script>
 
