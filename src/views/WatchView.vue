@@ -13,12 +13,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="flex justify-center min-h-auto px-4 py-12 bg-gradient-to-b from-gray-50 to-white"
-  >
+  <div class="flex justify-center min-h-auto px-4 py-12 bg-gradient-to-b from-gray-50 to-white">
     <div
-      class="w-full max-w-6xl bg-white/70 backdrop-blur-md border border-gray-200/60
-             shadow-md rounded-xl p-4 lg:p-8 transition flex flex-col items-center"
+      class="w-full max-w-6xl bg-white/70 backdrop-blur-md border border-gray-200/60 shadow-md rounded-xl p-4 lg:p-8 transition flex flex-col items-center"
       v-motion-fade-visible-once
     >
       <!-- Title with Experimental badge -->
@@ -40,7 +37,7 @@ onMounted(() => {
       <!-- Responsive iframe -->
       <div v-show="isLoaded" class="w-full aspect-video rounded-lg overflow-hidden shadow-lg">
         <iframe
-          :src="'https://vidlink.pro/movie/' + movieId"
+          :src="'https://vidlink.pro/movie/' + movieId + '?autoplay=true&title=false'"
           frameborder="0"
           allowfullscreen
           class="w-full h-full"
@@ -50,8 +47,8 @@ onMounted(() => {
 
       <!-- Disclaimer -->
       <p class="mt-6 text-sm text-gray-500 text-center max-w-2xl">
-        ⚠️ This player is provided by a <span class="font-semibold">third‑party service</span>.
-        Ads and pop‑ups may appear, and I do not control or endorse them.
+        ⚠️ This player is provided by a <span class="font-semibold">third‑party service</span>. Ads
+        and pop‑ups may appear, and I do not control or endorse them.
       </p>
     </div>
   </div>
