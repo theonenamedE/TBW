@@ -20,20 +20,13 @@ const alreadyAdded = computed(() =>
 
 <template>
   <div
-    class="card relative w-full h-full overflow-hidden
-           bg-white/70 backdrop-blur-md border border-gray-200/60
-           shadow-md hover:shadow-xl transition-all duration-300"
+    class="card relative w-full h-full overflow-hidden bg-white/70 backdrop-blur-md border border-gray-200/60 shadow-md hover:shadow-xl transition-all duration-300"
     v-motion-fade-visible-once
   >
     <!-- Poster -->
     <router-link :to="{ name: 'details', params: { id: props.movie.imdbID } }">
-      <figure
-        class="overflow-hidden flex items-center justify-center aspect-[2/3] bg-gray-50"
-      >
-        <span
-          v-if="props.loading"
-          class="loading loading-ring loading-lg text-primary"
-        ></span>
+      <figure class="overflow-hidden flex items-center justify-center aspect-[2/3] bg-gray-50">
+        <span v-if="props.loading" class="loading loading-ring loading-lg text-primary"></span>
 
         <div v-else-if="imageLoadFailed" class="flex items-center justify-center">
           <svg
@@ -72,9 +65,7 @@ const alreadyAdded = computed(() =>
     <div class="card-body p-4 flex flex-col">
       <router-link :to="{ name: 'details', params: { id: props.movie.imdbID } }">
         <h2
-          class="card-title text-base font-semibold
-                 bg-gradient-to-r from-gray-700 to-gray-500
-                 bg-clip-text text-transparent"
+          class="card-title text-base font-semibold bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent"
         >
           {{ props.movie.Title }}
         </h2>
@@ -84,22 +75,14 @@ const alreadyAdded = computed(() =>
       <div class="card-actions justify-end mt-auto">
         <button
           v-if="!alreadyAdded"
-          class="btn btn-sm px-4
-                 bg-gradient-to-r from-gray-100 to-gray-200
-                 border border-gray-300 text-gray-700
-                 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900
-                 transition"
+          class="btn btn-sm px-4 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 transition"
           @click="store.addMovie(props.movie)"
         >
           Add
         </button>
         <button
           v-else
-          class="btn btn-sm px-4
-                 bg-gradient-to-r from-red-50 to-red-100
-                 border border-red-200 text-red-600
-                 hover:from-red-100 hover:to-red-200 hover:text-red-700
-                 transition"
+          class="btn btn-sm px-4 bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200 hover:text-red-700 transition"
           @click="store.removeMovie(props.movie.imdbID)"
         >
           Remove

@@ -32,7 +32,7 @@ const routes: RouteRecordRaw[] = [
     path: '/watch/:name/:id',
     name: 'watch',
     component: WatchView,
-  }
+  },
 ]
 
 const router = createRouter({
