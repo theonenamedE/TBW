@@ -102,7 +102,7 @@ const alreadyAdded = computed(() =>
                  transition"
           @click="store.removeMovie(props.movie.imdbID)"
         >
-          Delete
+          Remove
         </button>
       </div>
     </div>

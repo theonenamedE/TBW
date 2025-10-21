@@ -4,6 +4,7 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import ListView from '@/views/ListView.vue'
 import DetailsView from '@/views/DetailsView.vue'
 import AddView from '@/views/AddView.vue'
+import WatchView from '@/views/WatchView.vue'
 
 const routes: RouteRecordRaw[] = [
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFoundView },
@@ -27,6 +28,11 @@ const routes: RouteRecordRaw[] = [
     name: 'add',
     component: AddView,
   },
+  {
+    path: '/watch/:name/:id',
+    name: 'watch',
+    component: WatchView,
+  }
 ]
 
 const router = createRouter({
