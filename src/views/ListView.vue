@@ -17,7 +17,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8">
+  <div class="container mx-auto px-4 py-8" v-motion-fade-visible-once>
     <MovieList
       v-auto-animate
       v-if="store.movieList"

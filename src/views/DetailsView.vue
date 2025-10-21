@@ -34,7 +34,7 @@ onMounted(async () => {
 
 <template>
   <div class="container mx-auto px-4 py-8">
-    <MovieDetails :movie="movie" />
+    <MovieDetails :movie="movie" v-motion-fade-visible-once />
   </div>
 </template>
 

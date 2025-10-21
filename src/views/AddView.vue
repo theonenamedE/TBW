@@ -102,15 +102,24 @@ watch(searchQuery, () => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-3xl font-bold text-center mb-8">Add a Movie</h1>
+  <div class="container mx-auto px-4 py-12" v-motion-fade-visible-once>
+    <!-- Title -->
+    <h1
+      class="text-4xl font-extrabold text-center mb-10
+             bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent"
+    >
+      Add a Movie
+    </h1>
 
+    <!-- Search bar -->
     <SearchBar v-model="searchQuery" @submit="searchMovie" />
 
-    <div v-if="isSearching" class="flex justify-center my-12">
-      <span class="loading loading-ring loading-lg"></span>
+    <!-- Loading spinner -->
+    <div v-if="isSearching" class="flex justify-center my-16">
+      <span class="loading loading-ring loading-lg text-primary"></span>
     </div>
 
+    <!-- Movie list -->
     <MovieList
       v-else-if="movies && movies.length > 0"
       :movies="movies"
@@ -121,10 +130,19 @@ watch(searchQuery, () => {
       :is-search="true"
     />
 
-    <p v-else class="text-center text-gray-500">Search for a movie to add it to your list</p>
+    <!-- Empty state -->
+    <p
+      v-else
+      class="text-center text-gray-500 mt-16
+             bg-gray-50/60 border border-gray-200 rounded-lg py-12"
+    >
+      Search for a movie to add it to your list
+    </p>
 
-    <div class="flex justify-center pt-2">
+    <!-- Error alert -->
+    <div class="flex justify-center pt-4">
       <ErrorAlert v-if="seachError" :message="seachError" />
     </div>
   </div>
 </template>
+

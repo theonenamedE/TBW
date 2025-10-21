@@ -1,40 +1,53 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="container mx-auto px-4 py-8">
-    <div class="flex flex-col items-center justify-center">
-      <h1 class="text-5xl font-bold text-center mb-12">
-        Welcome to <br /><span class="text-6xl font-bold text-center gradient-text"
-          >To Be Watched</span
-        >
+  <div class="container mx-auto px-4 py-16" v-motion-fade-visible-once>
+    <div class="flex flex-col items-center justify-center text-center">
+      <h1 class="text-5xl font-bold mb-8 leading-tight">
+        Welcome to <br />
+        <span class="text-6xl font-extrabold gradient-text">
+          To Be Watched
+        </span>
       </h1>
 
-      <p class="text-xl text-center mb-12">
-        A simple and beautiful movie list app built with Vue 3 and Tailwind CSS (daisyUI).
+      <p class="text-lg text-gray-600 max-w-2xl mb-12">
+        A simple and beautiful movie list app built with Vue&nbsp;3 and Tailwind&nbsp;CSS (daisyUI).
       </p>
-      <RouterLink to="/add" class="btn btn-primary btn-lg">Get Started</RouterLink>
+
+      <RouterLink
+        to="/add"
+        class="btn px-8 py-3 text-lg font-medium
+               bg-gradient-to-r from-gray-100 to-gray-200
+               border border-gray-300 text-gray-700
+               hover:from-gray-200 hover:to-gray-300 hover:text-gray-900
+               transition"
+      >
+        Get Started
+      </RouterLink>
     </div>
   </div>
 </template>
 
 <style scoped>
 .gradient-text {
-  background: linear-gradient(to right, black 0%, red 50%, blue 100%);
+  background: linear-gradient(
+    90deg,
+    #6b7280 0%,   /* gray-500 */
+    #818cf8 50%,  /* indigo-400 */
+    #22d3ee 100%  /* cyan-400 */
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 200% auto;
-  animation: gradient 3s ease infinite alternate;
+  animation: gradientShift 6s ease infinite alternate;
 }
 
-@keyframes gradient {
+@keyframes gradientShift {
   0% {
     background-position: left center;
   }
   100% {
     background-position: right center;
-  }
-  50% {
-    animation-play-state: paused;
   }
 }
 </style>
