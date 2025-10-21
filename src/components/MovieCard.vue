@@ -11,7 +11,6 @@ const props = defineProps<{
 const emit = defineEmits<{ (e: 'loaded', id: string): void }>()
 
 const store = useMoviesStore()
-
 const imageLoadFailed = ref(false)
 
 const alreadyAdded = computed(() =>
@@ -20,10 +19,10 @@ const alreadyAdded = computed(() =>
 </script>
 
 <template>
-  <div class="card card-side bg-base-100 shadow-md hover:shadow-lg transition rounded-sm">
+  <div class="card bg-base-100 shadow-sm hover:shadow-md transition rounded-sm w-full h-full">
     <router-link :to="{ name: 'details', params: { id: props.movie.imdbID } }">
-      <figure
-        class="overflow-hidden flex items-center justify-center bg-gray-100 aspect-[2/3] w-32 sm:w-40 md:w-48 rounded-l-sm"
+      <figure v-motion-fade-visible-once
+        class="overflow-hidden flex items-center justify-center bg-gray-100 aspect-[2/3] rounded-t-sm"
       >
         <span v-if="props.loading" class="loading loading-ring loading-xl text-primary"></span>
 
@@ -59,16 +58,22 @@ const alreadyAdded = computed(() =>
         />
       </figure>
     </router-link>
-    <div class="card-body p-4">
+
+    <div class="card-body p-4 flex flex-col">
       <router-link :to="{ name: 'details', params: { id: props.movie.imdbID } }">
         <h2 class="card-title text-lg">{{ props.movie.Title }}</h2>
         <p class="text-sm text-gray-500">{{ props.movie.Year }}</p>
       </router-link>
-      <div v-if="!alreadyAdded" class="card-actions justify-end mt-auto">
-        <button class="btn btn-sm btn-primary" @click="store.addMovie(props.movie)">Add</button>
-      </div>
-      <div v-else class="card-actions justify-end mt-auto">
-        <button class="btn btn-sm btn-error" @click="store.removeMovie(props.movie.imdbID)">
+
+      <div class="card-actions justify-end mt-auto">
+        <button
+          v-if="!alreadyAdded"
+          class="btn btn-sm btn-primary"
+          @click="store.addMovie(props.movie)"
+        >
+          Add
+        </button>
+        <button v-else class="btn btn-sm btn-error" @click="store.removeMovie(props.movie.imdbID)">
           Delete
         </button>
       </div>

@@ -25,7 +25,7 @@ const alreadyAdded = computed(() =>
     </div>
 
     <!-- Actual hero content -->
-    <div v-else class="hero bg-base-200 min-h-screen rounded-md">
+    <div v-else class="hero bg-base-200 min-h-screen rounded-md" v-motion-fade-visible-once>
       <div class="hero-content flex-col lg:flex-row gap-12">
         <!-- Poster -->
         <figure class="flex-shrink-0">

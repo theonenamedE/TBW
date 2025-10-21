@@ -10,6 +10,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{ (e: 'loaded', id: string): void; (e: 'loadMore'): void }>()
+
 </script>
 
 <template>
@@ -19,8 +20,11 @@ const emit = defineEmits<{ (e: 'loaded', id: string): void; (e: 'loadMore'): voi
       <RouterLink to="/add" class="text-black font-bold">Add a movie</RouterLink>
     </p>
 
-    <ul v-else class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <li v-for="movie in props.movies" :key="movie.imdbID">
+    <ul v-auto-animate
+      v-else
+      class="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
+    >
+      <li v-for="movie in props.movies" :key="movie.imdbID" v-auto-animate>
         <MovieCard
           :movie="movie"
           :loading="props.loadingImages[movie.imdbID]"
@@ -28,13 +32,20 @@ const emit = defineEmits<{ (e: 'loaded', id: string): void; (e: 'loadMore'): voi
         />
       </li>
     </ul>
-    <div v-if="props.isSearch && props.movies.length > 0" class="flex justify-center mt-8">
+
+    <div
+      v-if="props.isSearch && props.movies.length > 0"
+      class="flex justify-center mt-8"
+    >
       <button
         class="btn btn-outline btn-secondary"
         @click="emit('loadMore')"
         :disabled="props.loadingMore"
       >
-        <span v-if="props.loadingMore" class="loading loading-spinner loading-xs mr-2"></span>
+        <span
+          v-if="props.loadingMore"
+          class="loading loading-spinner loading-xs mr-2"
+        ></span>
         Load more
       </button>
     </div>
