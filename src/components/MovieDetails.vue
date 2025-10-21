@@ -17,11 +17,7 @@ const alreadyAdded = computed(() =>
 <template>
   <ErrorAlert v-if="props.movie?.Error" :message="props.movie.ErrorMessage" />
 
-  <div
-    v-else
-    class="min-h-screen flex items-center justify-center px-6 py-12
-           bg-gradient-to-b from-gray-50 to-white"
-  >
+
     <!-- Loading state -->
     <div v-if="props.movie === undefined" class="flex justify-center items-center">
       <span class="loading loading-ring loading-lg text-primary"></span>
@@ -99,5 +95,5 @@ const alreadyAdded = computed(() =>
         </div>
       </div>
     </div>
-  </div>
+  
 </template>
