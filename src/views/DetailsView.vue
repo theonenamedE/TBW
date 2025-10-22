@@ -1,40 +1,45 @@
 <script setup lang="ts">
-import MovieDetails from '@/components/MovieDetails.vue'
-import { getMovie } from '@/lib/api'
+import MediaDetails from '@/components/MediaDetails.vue'
+import { getMovieDetails, getSeriesDetails } from '@/lib/api'
 import type { MovieDetailsType } from '@/types/Movie'
+import type { TvSeriesDetailsType } from '@/types/TvSeries'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 
-const movie = ref<MovieDetailsType>()
+const movie = ref<MovieDetailsType | null>()
+const tvSeries = ref<TvSeriesDetailsType | null>()
 
 onMounted(async () => {
   try {
-    const response = await getMovie(route.params.id as string)
-    movie.value = response
+    if (route.params.id && route.params.type === 'movie') {
+      movie.value = await getMovieDetails(route.params.id as string)
+    } else if (route.params.id && route.params.type === 'tv') {
+      tvSeries.value = await getSeriesDetails(route.params.id as string)
+    } else {
+    }
   } catch (error) {
     console.error(error)
-    movie.value = {
-      Title: '',
-      Year: '',
-      imdbID: '',
-      Type: '',
-      Poster: '',
-      Plot: '',
-      Language: '',
-      Country: '',
-      imdbRating: '',
-      Error: true,
-      ErrorMessage: (error as Error).message,
-    }
   }
 })
 </script>
 
 <template>
   <div class="container mx-auto px-4 py-8">
-    <MovieDetails :movie="movie" v-motion-fade-visible-once />
+    <div
+      v-if="(route.params.type === 'movie' && !movie) || (route.params.type === 'tv' && !tvSeries)"
+      class="flex justify-center items-center"
+    >
+      <span class="loading loading-ring loading-lg text-primary"></span>
+    </div>
+    <MediaDetails
+      v-if="movie || tvSeries"
+      :type="(route.params.type as 'movie' | 'tv') || undefined"
+      :movie="movie"
+      :tv-series="tvSeries"
+      v-motion-fade-visible-once
+    />
   </div>
 </template>
 

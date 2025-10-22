@@ -1,5 +1,9 @@
 import type { MediaResponseType } from '@/types/Media'
 import { mapMedia } from '@/types/MediaMap'
+import type { MovieDetailsType } from '@/types/Movie'
+import { mapMovieDetails } from '@/types/MovieMap'
+import type { TvSeriesDetailsType } from '@/types/TvSeries'
+import { mapTvSeriesDetails } from '@/types/TvSeriesMap'
 import axios from 'axios'
 
 const TMDB_READ_API_KEY =
@@ -48,11 +52,11 @@ export const searchMovies = async (query: string): Promise<MediaResponseType> =>
 }
 
 export const loadMoreMovies = async (query: string, page: number): Promise<MediaResponseType> => {
-    const response = await instance.get(`/search/multi`, {
+  const response = await instance.get(`/search/multi`, {
     params: {
       query: query,
       include_adult: true,
-      page: page
+      page: page,
     },
   })
 
@@ -81,22 +85,26 @@ export const loadMoreMovies = async (query: string, page: number): Promise<Media
   return data
 }
 
-export const getMovieDetails = async (id: string) => {
-  const response = await instance.get(`movie/${id}`, {
-  })
+export const getMovieDetails = async (id: string): Promise<MovieDetailsType | null> => {
+  const response = await instance.get(`/movie/${id}`, {})
 
+  if (response.status !== 200) {
+    return null
+  }
 
+  const data: MovieDetailsType = mapMovieDetails(response.data)
 
-  return response.data
+  return data
 }
 
-export const getSeriesDetails = async (id: string) => {
-  const response = await instance.get(``, {
-    params: {
-      i: id,
-      plot: 'full',
-    },
-  })
+export const getSeriesDetails = async (id: string): Promise<TvSeriesDetailsType | null> => {
+  const response = await instance.get(`/tv/${id}`, {})
 
-  return response.data
+  if (response.status !== 200) {
+    return null
+  }
+
+  const data: TvSeriesDetailsType = mapTvSeriesDetails(response.data)
+
+  return data
 }

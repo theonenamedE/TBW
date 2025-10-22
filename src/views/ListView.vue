@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useMoviesStore } from '@/stores/movies'
+import { useMediaStore } from '@/stores/movies'
 import MovieList from '@/components/MovieList.vue'
 
-const store = useMoviesStore()
+const store = useMediaStore()
 </script>
 
 <template>
@@ -14,8 +14,8 @@ const store = useMoviesStore()
     </h1>
     <MovieList
       v-auto-animate
-      v-if="store.movieList"
-      :movies="store.movieList"
+      v-if="store.mediaList"
+      :movies="store.mediaList"
       :loading-more="false"
       :is-search="false"
     />

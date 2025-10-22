@@ -1,45 +1,43 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import type { MovieType } from '@/types/Movie'
+import type { MediaType } from '@/types/Media'
 
-function saveMovies(movies: MovieType[]) {
-  localStorage.setItem('movies', JSON.stringify(movies))
+function saveMedias(medias: MediaType[]) {
+  localStorage.setItem('medias', JSON.stringify(medias))
 }
 
-function loadMovies(): MovieType[] {
-  const movies = localStorage.getItem('movies')
-  return movies ? JSON.parse(movies) : []
+function loadMedias(): MediaType[] {
+  const medias = localStorage.getItem('medias')
+  return medias ? JSON.parse(medias) : []
 }
 
-export const useMoviesStore = defineStore('movies', () => {
-  const movieList = ref<MovieType[]>(loadMovies())
+export const useMediaStore = defineStore('medias', () => {
+  const mediaList = ref<MediaType[]>(loadMedias())
 
-  function addMovie(movie: MovieType) {
-    if (!movieList.value.find((m) => m.Id === movie.Id)) {
-      movieList.value.push(movie)
-      saveMovies(movieList.value)
+  function addMedia(media: MediaType) {
+    if (!mediaList.value.find((m) => m.Id === media.Id)) {
+      mediaList.value.push(media)
+      saveMedias(mediaList.value)
     }
   }
 
-  function removeMovie(movieId: number) {
-    movieList.value = movieList.value.filter((m) => m.Id !== movieId)
-    saveMovies(movieList.value)
+  function removeMedia(mediaId: number) {
+    mediaList.value = mediaList.value.filter((m) => m.Id !== mediaId)
+    saveMedias(mediaList.value)
   }
 
-  return { movieList, addMovie, removeMovie }
+  return { mediaList, addMedia, removeMedia }
 })
 
-// TODO: add state for search page
-
 export const useSearchPageStore = defineStore('searchPage', () => {
-  const movieList = ref<MovieType[]>()
+  const mediaList = ref<MediaType[]>()
   const searchPage = ref(0)
   const searchQuery = ref('')
 
-  function setState(page: number, query: string, movies: MovieType[]) {
+  function setState(page: number, query: string, medias: MediaType[]) {
     searchPage.value = page
     searchQuery.value = query
-    movieList.value = movies
+    mediaList.value = medias
   }
-  return { searchPage, searchQuery, movieList, setState }
+  return { searchPage, searchQuery, mediaList, setState }
 })

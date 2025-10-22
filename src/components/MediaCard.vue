@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { useMoviesStore } from '@/stores/movies'
+import { useMediaStore } from '@/stores/movies'
 import { computed, ref } from 'vue'
-import type { MovieType } from '@/types/Movie'
+import type { MediaType } from '@/types/Media'
 
 const props = defineProps<{
-  movie: MovieType
+  movie: MediaType
 }>()
 
-const store = useMoviesStore()
+const store = useMediaStore()
 const imageLoadFailed = ref(false)
 const loaded = ref(false)
 
-const alreadyAdded = computed(() => store.movieList.some((movie) => movie.Id === props.movie.Id))
+const alreadyAdded = computed(() => store.mediaList.some((media) => media.Id === props.movie.Id))
 
 const imageSource = computed(() => {
   if (!props.movie.PosterPath) {
@@ -27,7 +27,9 @@ const imageSource = computed(() => {
     v-motion-fade-visible-once
   >
     <!-- Poster -->
-    <router-link :to="{ name: 'details', params: { type: props.movie.MediaType, id: props.movie.Id } }">
+    <router-link
+      :to="{ name: 'details', params: { type: props.movie.MediaType, id: props.movie.Id } }"
+    >
       <figure class="overflow-hidden flex items-center justify-center aspect-[2/3] bg-gray-50">
         <span v-if="!loaded" class="loading loading-ring loading-lg text-primary"></span>
 
@@ -66,7 +68,9 @@ const imageSource = computed(() => {
 
     <!-- Body -->
     <div class="card-body p-4 flex flex-col">
-      <router-link :to="{ name: 'details', params: { type: props.movie.MediaType, id: props.movie.Id } }">
+      <router-link
+        :to="{ name: 'details', params: { type: props.movie.MediaType, id: props.movie.Id } }"
+      >
         <h2
           class="card-title text-base font-semibold bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent"
         >
@@ -80,7 +84,7 @@ const imageSource = computed(() => {
           v-motion-fade-visible-once
           v-if="!alreadyAdded"
           class="btn btn-sm px-4 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 transition"
-          @click="store.addMovie(props.movie)"
+          @click="store.addMedia(props.movie)"
         >
           Add
         </button>
@@ -88,7 +92,7 @@ const imageSource = computed(() => {
           v-motion-fade-visible-once
           v-else
           class="btn btn-sm px-4 bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200 hover:text-red-700 transition"
-          @click="store.removeMovie(props.movie.Id)"
+          @click="store.removeMedia(props.movie.Id)"
         >
           Remove
         </button>

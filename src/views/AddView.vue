@@ -3,11 +3,11 @@ import { loadMoreMovies, searchMovies } from '@/lib/api'
 import { onMounted, ref, watch } from 'vue'
 import SearchBar from '@/components/SearchBar.vue'
 import MovieList from '@/components/MovieList.vue'
-import type { MovieType } from '@/types/Movie'
+import type { MediaType } from '@/types/Media'
 import ErrorAlert from '@/components/alerts/ErrorAlert.vue'
 import { useSearchPageStore } from '@/stores/movies'
 
-const movies = ref<MovieType[]>()
+const movies = ref<MediaType[]>()
 const seachError = ref<string>('')
 const searchQuery = ref('')
 const searchPage = ref(1)
@@ -59,12 +59,12 @@ onMounted(() => {
   if (
     state.searchQuery !== '' &&
     state.searchPage !== 0 &&
-    state.movieList !== undefined &&
-    state.movieList.length > 0
+    state.mediaList !== undefined &&
+    state.mediaList.length > 0
   ) {
     searchQuery.value = state.searchQuery
     searchPage.value = state.searchPage
-    movies.value = state.movieList
+    movies.value = state.mediaList
   }
 })
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import AddMoreCard from './AddMoreCard.vue'
-import MovieCard from './MovieCard.vue'
-import type { MovieType } from '@/types/Movie'
+import MediaCard from './MediaCard.vue'
+import type { MediaType } from '@/types/Media'
 
 const props = defineProps<{
-  movies: MovieType[]
+  movies: MediaType[]
   loadingMore: boolean
   isSearch: boolean
 }>()
@@ -30,7 +30,7 @@ const emit = defineEmits<{ (e: 'loaded', id: string): void; (e: 'loadMore'): voi
       class="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
     >
       <li v-for="movie in props.movies" :key="movie.Id" v-auto-animate>
-        <MovieCard :movie="movie" />
+        <MediaCard :movie="movie" />
       </li>
       <li v-if="!props.isSearch">
         <AddMoreCard />
