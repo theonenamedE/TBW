@@ -21,15 +21,16 @@ async function searchMovie() {
     isSearching.value = true
     searchPage.value = 1
     const result = await searchMovies(searchQuery.value)
-    if (!result.Response) {
+    console.log(result)
+    if (result.totalResults === 0) {
       movies.value = []
-      seachError.value = result.ErrorMessage
+      seachError.value = 'No results found'
       return
     }
     seachError.value = ''
-    movies.value = result.Search
+    movies.value = result.Results
 
-    state.setState(searchPage.value, searchQuery.value, result.Search)
+    state.setState(searchPage.value, searchQuery.value, result.Results)
   } catch (error) {
     movies.value = []
     console.error(error)
@@ -44,7 +45,7 @@ async function loadMore() {
     isLoadingMore.value = true
     searchPage.value++
     const result = await loadMoreMovies(searchQuery.value, searchPage.value)
-    movies.value?.push(...result.Search)
+    movies.value?.push(...result.Results)
     state.setState(searchPage.value, searchQuery.value, movies.value ? movies.value : [])
   } catch (error) {
     searchPage.value = 1

@@ -11,9 +11,14 @@ const store = useMoviesStore()
 const imageLoadFailed = ref(false)
 const loaded = ref(false)
 
-const alreadyAdded = computed(() =>
-  store.movieList.some((movie) => movie.imdbID === props.movie.imdbID),
-)
+const alreadyAdded = computed(() => store.movieList.some((movie) => movie.Id === props.movie.Id))
+
+const imageSource = computed(() => {
+  if (!props.movie.PosterPath) {
+    return ''
+  }
+  return `https://image.tmdb.org/t/p/w300${props.movie.PosterPath}`
+})
 </script>
 
 <template>
@@ -22,7 +27,7 @@ const alreadyAdded = computed(() =>
     v-motion-fade-visible-once
   >
     <!-- Poster -->
-    <router-link :to="{ name: 'details', params: { id: props.movie.imdbID } }">
+    <router-link :to="{ name: 'details', params: { type: props.movie.MediaType, id: props.movie.Id } }">
       <figure class="overflow-hidden flex items-center justify-center aspect-[2/3] bg-gray-50">
         <span v-if="!loaded" class="loading loading-ring loading-lg text-primary"></span>
 
@@ -45,7 +50,7 @@ const alreadyAdded = computed(() =>
 
         <img
           v-show="loaded && !imageLoadFailed"
-          :src="props.movie.Poster"
+          :src="imageSource"
           :alt="props.movie.Title"
           class="object-cover w-full h-full transform transition-transform duration-500 hover:scale-105"
           @load="loaded = true"
@@ -61,13 +66,13 @@ const alreadyAdded = computed(() =>
 
     <!-- Body -->
     <div class="card-body p-4 flex flex-col">
-      <router-link :to="{ name: 'details', params: { id: props.movie.imdbID } }">
+      <router-link :to="{ name: 'details', params: { type: props.movie.MediaType, id: props.movie.Id } }">
         <h2
           class="card-title text-base font-semibold bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent"
         >
           {{ props.movie.Title }}
         </h2>
-        <p class="text-sm text-gray-400">{{ props.movie.Year }}</p>
+        <p class="text-sm text-gray-400">{{ props.movie.ReleaseDate.slice(0, 4) }}</p>
       </router-link>
 
       <div class="card-actions justify-end mt-auto">
@@ -83,7 +88,7 @@ const alreadyAdded = computed(() =>
           v-motion-fade-visible-once
           v-else
           class="btn btn-sm px-4 bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200 hover:text-red-700 transition"
-          @click="store.removeMovie(props.movie.imdbID)"
+          @click="store.removeMovie(props.movie.Id)"
         >
           Remove
         </button>

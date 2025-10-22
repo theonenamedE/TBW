@@ -15,14 +15,14 @@ export const useMoviesStore = defineStore('movies', () => {
   const movieList = ref<MovieType[]>(loadMovies())
 
   function addMovie(movie: MovieType) {
-    if (!movieList.value.find((m) => m.imdbID === movie.imdbID)) {
+    if (!movieList.value.find((m) => m.Id === movie.Id)) {
       movieList.value.push(movie)
       saveMovies(movieList.value)
     }
   }
 
-  function removeMovie(movieId: string) {
-    movieList.value = movieList.value.filter((m) => m.imdbID !== movieId)
+  function removeMovie(movieId: number) {
+    movieList.value = movieList.value.filter((m) => m.Id !== movieId)
     saveMovies(movieList.value)
   }
 
