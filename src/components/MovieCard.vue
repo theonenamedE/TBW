@@ -73,14 +73,14 @@ const alreadyAdded = computed(() =>
       </router-link>
 
       <div class="card-actions justify-end mt-auto">
-        <button v-motion-fade-visible
+        <button v-motion-fade-visible-once
           v-if="!alreadyAdded"
           class="btn btn-sm px-4 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 transition"
           @click="store.addMovie(props.movie)"
         >
           Add
         </button>
-        <button v-motion-fade-visible
+        <button v-motion-fade-visible-once
           v-else
           class="btn btn-sm px-4 bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200 hover:text-red-700 transition"
           @click="store.removeMovie(props.movie.imdbID)"
