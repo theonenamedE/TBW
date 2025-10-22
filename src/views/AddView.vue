@@ -10,7 +10,6 @@ import { useSearchPageStore } from '@/stores/movies'
 const movies = ref<MovieType[]>()
 const seachError = ref<string>('')
 const searchQuery = ref('')
-const loadingImages = ref<Record<string, boolean>>({})
 const searchPage = ref(1)
 const isSearching = ref(false)
 const isLoadingMore = ref(false)
@@ -28,19 +27,9 @@ async function searchMovie() {
       return
     }
     seachError.value = ''
-    const previouslyLoaded = Object.keys(loadingImages.value).filter((id) =>
-      result.Search.some((m: MovieType) => m.imdbID === id),
-    )
     movies.value = result.Search
 
     state.setState(searchPage.value, searchQuery.value, result.Search)
-
-    for (const m of result.Search) {
-      if (previouslyLoaded.includes(m.imdbID)) {
-        continue
-      }
-      loadingImages.value[m.imdbID] = true
-    }
   } catch (error) {
     movies.value = []
     console.error(error)
@@ -57,19 +46,12 @@ async function loadMore() {
     const result = await loadMoreMovies(searchQuery.value, searchPage.value)
     movies.value?.push(...result.Search)
     state.setState(searchPage.value, searchQuery.value, movies.value ? movies.value : [])
-    for (const m of result.Search) {
-      loadingImages.value[m.imdbID] = true
-    }
   } catch (error) {
     searchPage.value = 1
     seachError.value = (error as Error).message
   } finally {
     isLoadingMore.value = false
   }
-}
-
-function handleLoaded(id: string) {
-  loadingImages.value[id] = false
 }
 
 onMounted(() => {
@@ -122,9 +104,7 @@ watch(searchQuery, () => {
     <MovieList
       v-else-if="movies && movies.length > 0"
       :movies="movies"
-      :loading-images="loadingImages"
       :loading-more="isLoadingMore"
-      @loaded="handleLoaded"
       @loadMore="loadMore"
       :is-search="true"
     />

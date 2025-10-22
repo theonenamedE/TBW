@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
-  { 
-    path: '/:pathMatch(.*)*', 
-    name: 'NotFound', 
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
     component: () => import('@/views/NotFoundView.vue'),
   },
   {

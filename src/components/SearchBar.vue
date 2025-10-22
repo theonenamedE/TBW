@@ -4,6 +4,7 @@ import { ref } from 'vue'
 const props = defineProps<{ modelValue: string }>()
 const emit = defineEmits<{ (e: 'update:modelValue', value: string): void; (e: 'submit'): void }>()
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const localQuery = ref(props.modelValue)
 
 function onSubmit() {

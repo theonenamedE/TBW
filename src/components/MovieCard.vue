@@ -5,13 +5,11 @@ import type { MovieType } from '@/types/Movie'
 
 const props = defineProps<{
   movie: MovieType
-  loading: boolean | undefined
 }>()
-
-const emit = defineEmits<{ (e: 'loaded', id: string): void }>()
 
 const store = useMoviesStore()
 const imageLoadFailed = ref(false)
+const loaded = ref(false)
 
 const alreadyAdded = computed(() =>
   store.movieList.some((movie) => movie.imdbID === props.movie.imdbID),
@@ -26,7 +24,7 @@ const alreadyAdded = computed(() =>
     <!-- Poster -->
     <router-link :to="{ name: 'details', params: { id: props.movie.imdbID } }">
       <figure class="overflow-hidden flex items-center justify-center aspect-[2/3] bg-gray-50">
-        <span v-if="props.loading" class="loading loading-ring loading-lg text-primary"></span>
+        <span v-if="!loaded" class="loading loading-ring loading-lg text-primary"></span>
 
         <div v-else-if="imageLoadFailed" class="flex items-center justify-center">
           <svg
@@ -46,15 +44,15 @@ const alreadyAdded = computed(() =>
         </div>
 
         <img
-          v-show="!props.loading && !imageLoadFailed"
+          v-show="loaded && !imageLoadFailed"
           :src="props.movie.Poster"
           :alt="props.movie.Title"
           class="object-cover w-full h-full transform transition-transform duration-500 hover:scale-105"
-          @load="emit('loaded', props.movie.imdbID)"
+          @load="loaded = true"
           @error="
             () => {
               imageLoadFailed = true
-              emit('loaded', props.movie.imdbID)
+              loaded = true
             }
           "
         />
@@ -73,14 +71,16 @@ const alreadyAdded = computed(() =>
       </router-link>
 
       <div class="card-actions justify-end mt-auto">
-        <button v-motion-fade-visible-once
+        <button
+          v-motion-fade-visible-once
           v-if="!alreadyAdded"
           class="btn btn-sm px-4 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 transition"
           @click="store.addMovie(props.movie)"
         >
           Add
         </button>
-        <button v-motion-fade-visible-once
+        <button
+          v-motion-fade-visible-once
           v-else
           class="btn btn-sm px-4 bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200 hover:text-red-700 transition"
           @click="store.removeMovie(props.movie.imdbID)"
