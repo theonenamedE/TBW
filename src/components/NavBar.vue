@@ -1,6 +1,6 @@
 <template>
   <div
-    class="navbar sticky top-0 z-20 bg-white/70 backdrop-blur-md border-b border-gray-200/60 shadow-sm transition"
+    class="navbar sticky top-0 z-20 bg-white/70 glass border-b border-gray-200/60 shadow-sm transition"
   >
     <!-- Left -->
     <div class="navbar-start">
