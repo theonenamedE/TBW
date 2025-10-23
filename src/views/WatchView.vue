@@ -9,7 +9,7 @@ const isLoaded = ref(false)
 </script>
 
 <template>
-  <div class="flex justify-center min-h-auto px-4 py-12 bg-gradient-to-b from-gray-50 to-white">
+  <div class="flex justify-center min-h-auto px-4 py-12 bg-linear-to-b from-gray-50 to-white">
     <div
       class="w-full max-w-6xl bg-white/70 backdrop-blur-md border border-gray-200/60 shadow-md rounded-xl p-4 lg:p-8 transition flex flex-col items-center"
       v-motion-fade-visible-once
@@ -18,7 +18,7 @@ const isLoaded = ref(false)
       <div class="flex items-center gap-3 mb-6">
         <h1 class="text-3xl font-bold text-gray-700">
           Watch <br />
-          <span class="bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent">
+          <span class="bg-linear-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent">
             {{ movieName }}
           </span>
         </h1>

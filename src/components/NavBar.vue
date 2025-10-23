@@ -36,7 +36,7 @@
 
       <!-- Logo -->
       <RouterLink
-        class="btn btn-ghost normal-case text-2xl font-bold bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent"
+        class="btn btn-ghost normal-case text-2xl font-bold bg-linear-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent"
         to="/"
       >
         To Vue
@@ -65,7 +65,7 @@
     <!-- Right -->
     <div class="navbar-end">
       <RouterLink
-        class="btn px-5 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300"
+        class="btn px-5 bg-linear-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300"
         to="/list"
       >
         Go to library

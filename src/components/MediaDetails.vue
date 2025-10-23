@@ -37,7 +37,7 @@ const alreadyAdded = computed(() =>
     v-motion-fade-visible-once
   >
     <!-- Poster -->
-    <figure class="flex-shrink-0">
+    <figure class="shrink-0">
       <span v-if="!imageLoaded" class="loading loading-ring loading-lg text-primary"></span>
       <img
         v-show="imageLoaded"
@@ -85,19 +85,19 @@ const alreadyAdded = computed(() =>
         <span
           v-for="g in props.type === 'movie' ? props.movie!.Genres : props.tvSeries!.Genres"
           :key="g.id"
-          class="px-3 py-1 rounded-md text-sm bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 border border-gray-300"
+          class="px-3 py-1 rounded-md text-sm bg-linear-to-r from-gray-100 to-gray-200 text-gray-700 border border-gray-300"
         >
           {{ g.name }}
         </span>
         <span
           v-if="props.type === 'movie'"
-          class="px-3 py-1 rounded-md text-sm bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 border border-gray-300"
+          class="px-3 py-1 rounded-md text-sm bg-linear-to-r from-gray-100 to-gray-200 text-gray-700 border border-gray-300"
         >
           Runtime: {{ props.movie!.Runtime }} min
         </span>
         <span
           v-if="props.type === 'tv'"
-          class="px-3 py-1 rounded-md text-sm bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 border border-gray-300"
+          class="px-3 py-1 rounded-md text-sm bg-linear-to-r from-gray-100 to-gray-200 text-gray-700 border border-gray-300"
         >
           Seasons: {{ props.tvSeries!.NumberOfSeasons }}
         </span>
@@ -108,14 +108,14 @@ const alreadyAdded = computed(() =>
         <template v-if="(props.movie && props.media) || (props.tvSeries && props.media)">
           <button
             v-if="!alreadyAdded"
-            class="btn px-6 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300"
+            class="btn px-6 bg-linear-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300"
             @click="store.addMedia(props.media)"
           >
             Add to list
           </button>
           <button
             v-else
-            class="btn px-6 bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200"
+            class="btn px-6 bg-linear-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200"
             @click="store.removeMedia(props.media.Id)"
           >
             Remove from library
@@ -132,7 +132,7 @@ const alreadyAdded = computed(() =>
           }"
         >
           <button
-            class="btn relative flex items-center gap-2 px-6 bg-gradient-to-r from-indigo-500 to-violet-500 text-white border-0 shadow-md hover:opacity-90 transition"
+            class="btn relative flex items-center gap-2 px-6 bg-linear-to-r from-indigo-500 to-violet-500 text-white border-0 shadow-md hover:opacity-90 transition"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

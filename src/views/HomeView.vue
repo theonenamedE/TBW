@@ -14,7 +14,7 @@
 
       <RouterLink
         to="/add"
-        class="btn px-8 py-3 text-lg font-medium bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 transition"
+        class="btn px-8 py-3 text-lg font-medium bg-linear-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 transition"
       >
         Get Started
       </RouterLink>

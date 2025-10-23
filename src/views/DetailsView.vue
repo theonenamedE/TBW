@@ -64,7 +64,7 @@ onMounted(async () => {
     <!-- Details -->
     <MediaDetails
       v-else-if="movieDetails || tvSeriesDetails"
-      :type="(route.params.type as 'movie' | 'tv')"
+      :type="route.params.type === 'movie' ? 'movie' : 'tv'"
       :media="media"
       :movie="movieDetails"
       :tv-series="tvSeriesDetails"

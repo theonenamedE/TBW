@@ -48,7 +48,7 @@ function onSubmit() {
       <!--
       <button
         type="submit"
-        class="px-4 py-2 bg-gradient-to-r from-gray-100 to-gray-200
+        class="px-4 py-2 bg-linear-to-r from-gray-100 to-gray-200
                border-l border-gray-200 text-gray-600 hover:text-gray-800
                transition"
       >

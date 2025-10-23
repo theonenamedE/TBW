@@ -39,7 +39,7 @@ const emit = defineEmits<{ (e: 'loaded', id: string): void; (e: 'loadMore'): voi
 
     <div v-if="props.isSearch && props.movies.length > 0" class="flex justify-center mt-8">
       <button
-        class="btn px-6 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 disabled:opacity-50"
+        class="btn px-6 bg-linear-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 disabled:opacity-50"
         @click="emit('loadMore')"
         :disabled="props.loadingMore"
       >

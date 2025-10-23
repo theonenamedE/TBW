@@ -30,7 +30,7 @@ const imageSource = computed(() => {
     <router-link
       :to="{ name: 'details', params: { type: props.movie.MediaType, id: props.movie.Id } }"
     >
-      <figure class="overflow-hidden flex items-center justify-center aspect-[2/3] bg-gray-50">
+      <figure class="overflow-hidden flex items-center justify-center aspect-2/3 bg-gray-50">
         <span v-if="!loaded" class="loading loading-ring loading-lg text-primary"></span>
 
         <div v-else-if="imageLoadFailed" class="flex items-center justify-center">
@@ -72,7 +72,7 @@ const imageSource = computed(() => {
         :to="{ name: 'details', params: { type: props.movie.MediaType, id: props.movie.Id } }"
       >
         <h2
-          class="card-title text-base font-semibold bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent"
+          class="card-title text-base font-semibold bg-linear-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent"
         >
           {{ props.movie.Title }}
         </h2>
@@ -83,7 +83,7 @@ const imageSource = computed(() => {
         <button
           v-motion-fade-visible-once
           v-if="!alreadyAdded"
-          class="btn btn-sm px-4 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 transition"
+          class="btn btn-sm px-4 bg-linear-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 transition"
           @click="store.addMedia(props.movie)"
         >
           Add
@@ -91,7 +91,7 @@ const imageSource = computed(() => {
         <button
           v-motion-fade-visible-once
           v-else
-          class="btn btn-sm px-4 bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200 hover:text-red-700 transition"
+          class="btn btn-sm px-4 bg-linear-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200 hover:text-red-700 transition"
           @click="store.removeMedia(props.movie.Id)"
         >
           Remove
