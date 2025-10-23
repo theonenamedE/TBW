@@ -1,4 +1,6 @@
-import type { MediaType } from "./Media"
+import type { MediaType } from './Media'
+import type { MovieDetailsType } from './Movie'
+import type { TvSeriesDetailsType } from './TvSeries'
 
 type TMDBMedia = {
   adult: boolean
@@ -35,3 +37,41 @@ export const mapMedia = (m: TMDBMedia): MediaType => ({
   VoteAverage: m.vote_average,
   VoteCount: m.vote_count,
 })
+
+export const mapMovieDetailsToMedia = (movie: MovieDetailsType): MediaType => {
+  return {
+    Adult: movie.Adult,
+    BackdropPath: movie.BackdropPath,
+    Id: movie.Id,
+    Title: movie.Title,
+    OriginalTitle: movie.OriginalTitle,
+    OriginalLanguage: movie.OriginalLanguage,
+    MediaType: 'movie', // since this mapper is for MovieDetailsType
+    Overview: movie.Overview,
+    PosterPath: movie.PosterPath,
+    Popularity: movie.Popularity,
+    ReleaseDate: movie.ReleaseDate,
+    FirstAirDate: '', // not applicable for movies
+    VoteAverage: movie.VoteAverage,
+    VoteCount: movie.VoteCount,
+  }
+}
+
+export const mapTvSeriesDetailsToMedia = (tv: TvSeriesDetailsType): MediaType => {
+  return {
+    Adult: tv.Adult,
+    BackdropPath: tv.BackdropPath,
+    Id: tv.Id,
+    Title: tv.Name, // TV shows use "Name"
+    OriginalTitle: tv.OriginalName,
+    OriginalLanguage: tv.OriginalLanguage,
+    MediaType: 'tv',
+    Overview: tv.Overview,
+    PosterPath: tv.PosterPath,
+    Popularity: tv.Popularity,
+    ReleaseDate: '', // not applicable for TV
+    FirstAirDate: tv.FirstAirDate,
+    VoteAverage: tv.VoteAverage,
+    VoteCount: tv.VoteCount,
+  }
+}

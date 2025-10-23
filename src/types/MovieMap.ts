@@ -1,4 +1,4 @@
-import type { MovieDetailsType } from "./Movie"
+import type { MovieDetailsType } from './Movie'
 
 type TMDBMovieDetails = {
   adult: boolean
@@ -43,9 +43,9 @@ export const mapMovieDetails = (m: TMDBMovieDetails): MovieDetailsType => ({
   Adult: m.adult,
   BackdropPath: m.backdrop_path ?? '',
   Budget: m.budget,
-  Genres: m.genres.map(genre => ({
+  Genres: m.genres.map((genre) => ({
     id: genre.id,
-    name: genre.name
+    name: genre.name,
   })),
   Homepage: m.homepage,
   Id: m.id,
@@ -55,23 +55,23 @@ export const mapMovieDetails = (m: TMDBMovieDetails): MovieDetailsType => ({
   Overview: m.overview,
   Popularity: m.popularity,
   PosterPath: m.poster_path ?? '',
-  ProductionCompanies: m.production_companies.map(company => ({
+  ProductionCompanies: m.production_companies.map((company) => ({
     id: company.id,
     logoPath: company.logo_path,
     name: company.name,
-    originCountry: company.origin_country
+    originCountry: company.origin_country,
   })),
-  ProductionCountries: m.production_countries.map(country => ({
+  ProductionCountries: m.production_countries.map((country) => ({
     iso31661: country.iso_3166_1,
-    name: country.name
+    name: country.name,
   })),
   ReleaseDate: m.release_date,
   Revenue: m.revenue,
   Runtime: m.runtime ?? 0,
-  SpokenLanguages: m.spoken_languages.map(lang => ({
+  SpokenLanguages: m.spoken_languages.map((lang) => ({
     englishName: lang.english_name,
     iso6391: lang.iso_639_1,
-    name: lang.name
+    name: lang.name,
   })),
   Status: m.status,
   Tagline: m.tagline ?? '',

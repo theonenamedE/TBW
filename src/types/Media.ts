@@ -9,7 +9,7 @@ export type MediaType = {
   Overview: string
   PosterPath: string
   Popularity: number
-  ReleaseDate: string  // For movies
+  ReleaseDate: string // For movies
   FirstAirDate: string // For TV series
   VoteAverage: number
   VoteCount: number

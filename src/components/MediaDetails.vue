@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { MovieDetailsType } from '@/types/Movie'
 import type { TvSeriesDetailsType } from '@/types/TvSeries'
-import { computed , ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useMediaStore } from '@/stores/movies'
 import type { MediaType } from '@/types/Media'
 
 const props = defineProps<{
   type: 'movie' | 'tv'
+  media?: MediaType
   movie?: MovieDetailsType | null
   tvSeries?: TvSeriesDetailsType | null
 }>()
@@ -103,24 +104,23 @@ const alreadyAdded = computed(() =>
       </div>
 
       <!-- Actions -->
-       <!-- TODO: Fix this -->
       <div class="card-actions" v-auto-animate>
-        <!-- <template v-if="props.type === 'movie' && props.movie">
+        <template v-if="(props.movie && props.media) || (props.tvSeries && props.media)">
           <button
             v-if="!alreadyAdded"
             class="btn px-6 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 text-gray-700 hover:from-gray-200 hover:to-gray-300"
-            @click="store.addMedia(props.movie)"
+            @click="store.addMedia(props.media)"
           >
             Add to list
           </button>
           <button
             v-else
             class="btn px-6 bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 hover:from-red-100 hover:to-red-200"
-            @click="store.removeMedia(props.movie.ImdbId)"
+            @click="store.removeMedia(props.media.Id)"
           >
             Remove from library
           </button>
-        </template> -->
+        </template>
 
         <RouterLink
           :to="{

@@ -17,7 +17,7 @@ const isLoaded = ref(false)
       <!-- Title with Experimental badge -->
       <div class="flex items-center gap-3 mb-6">
         <h1 class="text-3xl font-bold text-gray-700">
-          Watch
+          Watch <br />
           <span class="bg-gradient-to-r from-indigo-500 to-cyan-400 bg-clip-text text-transparent">
             {{ movieName }}
           </span>
